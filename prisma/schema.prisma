@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum LoginType {
+  Normal
+  GitHub
+  Gmail
+  Facebook
+}
+
+model User {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  image         String?
+  email         String?    @unique
+  emailVerified Boolean    @default(false)
+  phone         String     @unique
+  password      String?
+  loginType     LoginType  @default(Normal)
+  address       Address
+  role          Role       @default(User)
+  venture       Venture[]
+  prospect      Prospect[]
+
+  
+}
+
+enum Role {
+  Admin
+  Agent
+  User
+}
+
+model Venture {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  address     Address
+  startDate   DateTime
+  status      VentureStatus @default(Available)
+
+  location       String?
+  category       Category
+  units          Int
+  availableUnits Int
+
+  ownerId String @db.ObjectId
+
+  owner    User     @relation(name: "ownership", fields: [ownerId], references: [id])
+  agentIds String[]
+  agents   User[]   @relation(fields: [agentIds], references: [id])
+}
+
+type Address {
+  name     String
+  village  String
+  city     String
+  State    String
+  landmark String?
+}
+
+enum Status {
+  created
+  accepted
+  pending
+  approved
+  cancelled
+}
+
+enum VentureStatus {
+  Available
+  SoldOut
+}
+
+model Prospect {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  phoneNumber String
+  address     Address?
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?  @db.ObjectId
+}
+
+enum Category {
+  villa
+  apartment
+  plot
+}
