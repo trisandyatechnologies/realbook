@@ -21,26 +21,40 @@ enum LoginType {
 }
 
 model User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   image         String?
-  email         String?    @unique
-  emailVerified Boolean    @default(false)
-  phone         String     @unique
+  email         String?   @unique
+  emailVerified Boolean   @default(false)
+  phone         String    @unique
   password      String?
-  loginType     LoginType  @default(Normal)
+  loginType     LoginType @default(Normal)
   address       Address
-  role          Role       @default(User)
-  venture       Venture[]
-  prospect      Prospect[]
+  role          Role      @default(User)
 
-  
+  ventureIds String[]  @db.ObjectId
+  ventures   Venture[] @relation("ventureAgent", fields: [ventureIds], references: [id])
+
+  ownedVentures Venture[] @relation("ventureOwnership")
+
+  siteVisits SiteVisit[]
 }
 
 enum Role {
   Admin
   Agent
   User
+}
+
+enum VentureCategory {
+  Villas
+  Individual_Houses
+  Apartments
+  Plots
+  Grouped_House
+  Gated_Community
+  Semi_Gated_Community
+  Standalone_Building
 }
 
 model Venture {
@@ -51,50 +65,74 @@ model Venture {
   startDate   DateTime
   status      VentureStatus @default(Available)
 
-  location       String?
-  category       Category
-  units          Int
-  availableUnits Int
+  location  String?
+  category  VentureCategory
+  units     Int
+  soldUnits Int
 
   ownerId String @db.ObjectId
+  owner   User   @relation("ventureOwnership", fields: [ownerId], references: [id])
 
-  owner    User     @relation(name: "ownership", fields: [ownerId], references: [id])
-  agentIds String[]
-  agents   User[]   @relation(fields: [agentIds], references: [id])
+  agentIds String[] @db.ObjectId
+  agents   User[]   @relation("ventureAgent", fields: [agentIds], references: [id])
 }
 
 type Address {
-  name     String
+  street   String
   village  String
   city     String
-  State    String
+  state    String
+  country  String
+  survey   String? // Survey Number
   landmark String?
 }
 
-enum Status {
-  created
-  accepted
-  pending
-  approved
-  cancelled
+enum ProspectStatus {
+  Created // Just added the record
+  Site_Visit // In Site Visit state
+  Pending // Pending from prospect
+  Interested // Covert to buy
+  NotInterested // No more a prospect
+  Bought // Success
+  Dropped // Dropped somewhere in the progress
+  Absconded // Not reachable
 }
 
 enum VentureStatus {
   Available
-  SoldOut
+  Sold_Out
 }
 
 model Prospect {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  phoneNumber String
-  address     Address?
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      String?  @db.ObjectId
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  phone      String
+  address    Address?
+  status     ProspectStatus @default(Created)
+  siteVisits SiteVisit[]
 }
 
-enum Category {
-  villa
-  apartment
-  plot
+enum SiteVisitStatus {
+  Requested
+  Rejected
+  Accepted
+  VehicleAllocated
+  Scheduled
+  InProgress
+  Success
+  Failure
+}
+
+model SiteVisit {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  prospectId String   @db.ObjectId
+  prospect   Prospect @relation(fields: [prospectId], references: [id])
+
+  agentId String @db.ObjectId
+  agent   User   @relation(fields: [agentId], references: [id])
+
+  status SiteVisitStatus @default(Requested)
+
+  address Address?
 }
