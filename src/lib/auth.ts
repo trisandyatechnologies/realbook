@@ -25,7 +25,8 @@ async function createUser(
   name: string,
   email: string,
   phone: string,
-  password: string
+  password: string,
+  address?: any 
 ): Promise<User | null> {
   let hashedPassword;
   if (password) {
@@ -37,7 +38,8 @@ async function createUser(
         email,
         name,
         phone,
-        password: hashedPassword
+        password: hashedPassword,
+address
       },
     });
     return user;
