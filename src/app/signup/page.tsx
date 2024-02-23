@@ -1,23 +1,28 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HeatMapOutlined, LockOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 
 
 const App: React.FC = () => {
+ 
+
+
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
 
   return (
+    <center style={{padding:'20px'}}>
     <Form 
-    style={{padding:' 50px 500px'}}
+    
+    style={{ padding:'0 50px',background:" linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)", borderRadius:'20px',width:'500px',height:'500px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
-      <h1 style={{textAlign:'center'}}> Signup</h1>
+      <h1 style={{padding:'10px'}}> Signup</h1>
       <Form.Item
         name="First Name"
         rules={[{ required: true, message: 'Please input your First Name!' }]}
@@ -41,6 +46,7 @@ const App: React.FC = () => {
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email or Phone Number" />
       </Form.Item>
+      
       <Form.Item
         name="location"
         rules={[{ required: true, message: ' email ore phone number!' }]}
@@ -48,10 +54,10 @@ const App: React.FC = () => {
         <Input prefix={<HeatMapOutlined  className="site-form-item-icon" />} placeholder="adress" />
       </Form.Item>
       <Form.Item
-        name="location"
-        rules={[{ required: true, message: ' email ore phone number!' }]}
+        name="eria"
+        rules={[{ required: true, message: ' eria!' }]}
       >
-        <Input prefix={<YuqueOutlined   className="site-form-item-icon" />} placeholder="eria" />
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="eria"/>
       </Form.Item>
       
         <Input
@@ -61,7 +67,7 @@ const App: React.FC = () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item>
+      <Form.Item style={{marginLeft:'50%'}}>
         
 
         <a className="login-form-forgot" href="/signin">
@@ -69,13 +75,14 @@ const App: React.FC = () => {
         </a>
       </Form.Item>
 
-      <Form.Item style={{marginLeft:'130px'}}>
-        <Button  type="primary" htmlType="submit" >
+      <Form.Item >
+        <Button style={{width:'40%',backgroundColor:'#f69d3c'}}  htmlType="submit" >
           signup
         </Button>
       
       </Form.Item>
     </Form>
+    </center>
   );
 };
 

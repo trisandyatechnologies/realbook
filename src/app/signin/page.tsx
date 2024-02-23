@@ -10,13 +10,15 @@ const App: React.FC = () => {
   };
 
   return (
+    <center style={{padding:'100px'}}>
     <Form 
+    style={{background:"linear-gradient(#f58cd0, #ebf8e1, #f69d3c)",width:'450px',height:'400px',borderRadius:'20px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
-        <h1 style={{textAlign:'center'}}>Signin</h1>
+        <h1 style={{padding:'20px'}}>Signin</h1>
       <Form.Item
         name="Email"
         rules={[{ required: true, message: 'Please input your Username!' }]}
@@ -52,6 +54,7 @@ const App: React.FC = () => {
         Or <a href="/signup">register now!</a>
       </Form.Item>
     </Form>
+    </center>
   );
 };
 
