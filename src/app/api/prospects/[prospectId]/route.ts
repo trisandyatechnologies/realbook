@@ -25,6 +25,17 @@ export async function PUT(req: Request, { params }: ProspectsParams) {
   return NextResponse.json(prospect);
 }
 
+export async function PATCH(req: Request, { params }: ProspectsParams) {
+  const prospectBody = await req.json();
+  const prospect = await prisma.prospect.update({
+    data: prospectBody,
+    where: {
+      id: params.prospectId,
+    },
+  });
+  return NextResponse.json(prospect);
+}
+
 export async function DELETE(req: Request, { params }: ProspectsParams) {
     const prospect = await prisma.prospect.delete({
       where: {
