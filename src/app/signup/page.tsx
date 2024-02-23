@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { HeatMapOutlined, LockOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
+import { EnvironmentOutlined, HeatMapOutlined, LockOutlined, PhoneOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 
 
@@ -44,20 +44,20 @@ const App: React.FC = () => {
         name="Email ore phone number"
         rules={[{ required: true, message: ' email ore phone number!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email or Phone Number" />
+        <Input prefix={<PhoneOutlined  className="site-form-item-icon" />} placeholder="Email or Phone Number" />
       </Form.Item>
       
       <Form.Item
         name="location"
-        rules={[{ required: true, message: ' email ore phone number!' }]}
+        rules={[{ required: true, message: ' address!' }]}
       >
-        <Input prefix={<HeatMapOutlined  className="site-form-item-icon" />} placeholder="adress" />
+        <Input prefix={<HeatMapOutlined  className="site-form-item-icon" />} placeholder="Address" />
       </Form.Item>
       <Form.Item
-        name="eria"
-        rules={[{ required: true, message: ' eria!' }]}
+        name="area"
+        rules={[{ required: true, message: ' area!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="eria"/>
+        <Input prefix={<EnvironmentOutlined  className="site-form-item-icon" />} placeholder="Area"/>
       </Form.Item>
       
         <Input
@@ -67,7 +67,7 @@ const App: React.FC = () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item style={{marginLeft:'50%'}}>
+      <Form.Item style={{marginLeft:'90%'}}>
         
 
         <a className="login-form-forgot" href="/signin">
