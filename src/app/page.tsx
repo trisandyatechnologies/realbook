@@ -1,11 +1,8 @@
-
-import { Col, Row } from "antd";
-import About from "./about/page";
+"use client"
 
 export default function Home() {
   return (
-    <main>
-      <About />
+    <main >
     </main>
   );
 }

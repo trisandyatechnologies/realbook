@@ -1,6 +1,12 @@
 'use client'
 import { Col, Flex, Image, Layout, Row, Typography } from 'antd';
+import Link from 'antd/es/typography/Link';
 import React from 'react';
+
+
+
+
+
 
 const About = () => {
     return (
