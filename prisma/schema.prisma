@@ -73,8 +73,9 @@ model Venture {
   ownerId String @db.ObjectId
   owner   User   @relation("ventureOwnership", fields: [ownerId], references: [id])
 
-  agentIds String[] @db.ObjectId
-  agents   User[]   @relation("ventureAgent", fields: [agentIds], references: [id])
+  agentIds String[]   @db.ObjectId
+  agents   User[]     @relation("ventureAgent", fields: [agentIds], references: [id])
+  Prospect Prospect[]
 }
 
 type Address {
@@ -110,6 +111,8 @@ model Prospect {
   address    Address?
   status     ProspectStatus @default(Created)
   siteVisits SiteVisit[]
+  ventureId  String         @db.ObjectId
+  venture    Venture        @relation(fields: [ventureId], references: [id])
 }
 
 enum SiteVisitStatus {
