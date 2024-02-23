@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
     // },
     //},
   });
-  return NextResponse.json(ventureBody);
+  return NextResponse.json(venture);
 }
 export async function GET(req: Request, res: Response) {
   const ventures = await prisma.venture.findMany({});
