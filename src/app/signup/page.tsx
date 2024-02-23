@@ -51,7 +51,7 @@ const App: React.FC = () => {
         name="location"
         rules={[{ required: true, message: ' email ore phone number!' }]}
       >
-        <Input prefix={<YuqueOutlined   className="site-form-item-icon" />} placeholder="erie" />
+        <Input prefix={<YuqueOutlined   className="site-form-item-icon" />} placeholder="eria" />
       </Form.Item>
       
         <Input
