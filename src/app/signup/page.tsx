@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { HeatMapOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import { HeatMapOutlined, LockOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 
 
@@ -46,6 +46,12 @@ const App: React.FC = () => {
         rules={[{ required: true, message: ' email ore phone number!' }]}
       >
         <Input prefix={<HeatMapOutlined  className="site-form-item-icon" />} placeholder="adress" />
+      </Form.Item>
+      <Form.Item
+        name="location"
+        rules={[{ required: true, message: ' email ore phone number!' }]}
+      >
+        <Input prefix={<YuqueOutlined   className="site-form-item-icon" />} placeholder="erie" />
       </Form.Item>
       
         <Input
