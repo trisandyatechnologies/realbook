@@ -36,7 +36,10 @@ const About = () => {
                     </Typography.Title>
                 </Col>
             </Row>
-            <Image style={{ width: "100%" }} src='https://png.pngtree.com/thumb_back/fh260/background/20210906/pngtree-high-tech-real-estate-blue-banner-technology-image_805815.jpg' />
+            <Flex  >
+                <Image src='https://images.unsplash.com/photo-1605146769289-440113cc3d00?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' />
+            </Flex>
+            {/* <Image style={{ width: "100%", height: "20" }} src='https://images.unsplash.com/photo-1605146769289-440113cc3d00?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' /> */}
             <Row style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Col span={10}>
                     <Typography.Title level={2} style={{ color: 'blue' }}>
