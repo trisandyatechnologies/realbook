@@ -1,4 +1,3 @@
-"use client"
 import { API_ROOT } from "@/utils/config";
 import { Venture } from "@prisma/client/edge";
 import { Prospect } from "@prisma/client/edge";
