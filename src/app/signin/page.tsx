@@ -14,7 +14,8 @@ const App: React.FC = () => {
     <Typography style={{backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`}}>
     <center style={{padding:'100px 400px'}}>
     <Form 
-    style={{backgroundColor:'white',height:'400px',borderRadius:'20px'}}
+    
+    style={{height:'400px',backgroundColor:'rgba(255,254,254,0.5)',backdropFilter:'blur(1px)',borderRadius:'20px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
