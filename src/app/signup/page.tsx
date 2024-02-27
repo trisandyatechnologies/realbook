@@ -14,7 +14,7 @@ const signup: React.FC = () => {
   };
 
   return (
-    <Typography style={{ backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,height:'100vh'}}>
+    <main style={{ backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,height:'100vh'}}>
     <center style={{padding:'20px'}}>
 
     <Form 
@@ -24,7 +24,7 @@ const signup: React.FC = () => {
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
-      <h1 style={{padding:'10px'}}> Signup</h1>
+      <Typography.Title level={4} style={{padding:'10px'}}> Signup</Typography.Title>
       <Flex >
       <Form.Item
       style={{marginRight:'5px'}}
@@ -75,12 +75,14 @@ const signup: React.FC = () => {
           placeholder="Password"
         />
       </Form.Item>
-      <Form.Item style={{marginLeft:'90%'}}>
+      <Form.Item style={{}}>
         
-
-        <Link className="login-form-forgot" style={{color:'black'}} href="/signin">
+<Typography>Already have an account ?
+  
+        <Link className="login-form-forgot" style={{margin:"0 15px"}} href="/signin">
           Signin
         </Link>
+        </Typography>
       </Form.Item>
 
       <Form.Item >
@@ -91,7 +93,7 @@ const signup: React.FC = () => {
       </Form.Item>
     </Form>
     </center>
-    </Typography>
+    </main>
   );
 };
 

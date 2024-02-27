@@ -1,18 +1,21 @@
 'use client';
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Typography, theme } from 'antd';
 
-import Typography from 'antd/es/typography/Typography';
+// import Typography from 'antd/es/typography/Typography';
 import Link from 'next/link';
 
 const signin: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
+  const {
+    token:{padding,margin},
+  } = theme.useToken()
 
   return (
-    <Typography style={{backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`}}>
+    <main style={{backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`}}>
     <center style={{padding:'100px 400px'}}>
     <Form 
     
@@ -22,7 +25,7 @@ const signin: React.FC = () => {
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
-        <h1 style={{padding:'20px'}}>Signin</h1>
+        <Typography.Title level={3} style={{padding:padding}}> Signin</Typography.Title>
       <Form.Item
         name="Email"
         rules={[{ required: true, message: 'Please input your Username!' }]}
@@ -60,7 +63,7 @@ const signin: React.FC = () => {
       </Form.Item>
     </Form>
     </center>
-    </Typography>
+    </main>
   );
 };
 
