@@ -2,10 +2,11 @@
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import "./auth.css";
-import Typography from 'antd/es/typography/Typography';
 
-const App: React.FC = () => {
+import Typography from 'antd/es/typography/Typography';
+import Link from 'next/link';
+
+const signin: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
@@ -15,7 +16,7 @@ const App: React.FC = () => {
     <center style={{padding:'100px 400px'}}>
     <Form 
     
-    style={{height:'400px',backgroundColor:'rgba(255,254,254,0.5)',backdropFilter:'blur(1px)',borderRadius:'20px'}}
+    style={{ padding:"0 100px",height:'400px',backgroundColor:'rgba(255,254,254,0.5)',backdropFilter:'blur(1px)',borderRadius:'20px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
@@ -42,20 +43,20 @@ const App: React.FC = () => {
         />
       </Form.Item>
       <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
+        <Form.Item style={{margin:'0 40px'}} name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
+        <Link style={{color:'black'}} href="">
           Forgot password
-        </a>
+        </Link>
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+      <Form.Item >
+        <Button type="primary" htmlType="submit" style={{ margin:'20px'}}>
           Log in
         </Button>
-        Or <a href="/signup">register now!</a>
+        Or <Link style={{ color:'black',margin:"0 10px"}} href="/signup">register now!</Link>
       </Form.Item>
     </Form>
     </center>
@@ -63,4 +64,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default signin;

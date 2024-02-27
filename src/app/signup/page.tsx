@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { EnvironmentOutlined, HeatMapOutlined, LockOutlined, PhoneOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Flex, Form, Input, Typography } from 'antd';
+import Link from 'next/link';
 
 
-const App: React.FC = () => {
+const signup: React.FC = () => {
  
 
 
@@ -77,9 +78,9 @@ const App: React.FC = () => {
       <Form.Item style={{marginLeft:'90%'}}>
         
 
-        <a className="login-form-forgot" style={{color:'black'}} href="/signin">
+        <Link className="login-form-forgot" style={{color:'black'}} href="/signin">
           Signin
-        </a>
+        </Link>
       </Form.Item>
 
       <Form.Item >
@@ -94,4 +95,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;   
+export default signup;   
