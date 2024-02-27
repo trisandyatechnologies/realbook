@@ -3,6 +3,7 @@ import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import "./auth.css";
+import Typography from 'antd/es/typography/Typography';
 
 const App: React.FC = () => {
   const onFinish = (values: any) => {
@@ -10,9 +11,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <center style={{padding:'100px'}}>
+    <Typography style={{backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`}}>
+    <center style={{padding:'100px 400px'}}>
     <Form 
-    style={{background:"linear-gradient(#f58cd0, #ebf8e1, #f69d3c)",width:'450px',height:'400px',borderRadius:'20px'}}
+    style={{backgroundColor:'white',height:'400px',borderRadius:'20px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
@@ -23,7 +25,7 @@ const App: React.FC = () => {
         name="Email"
         rules={[{ required: true, message: 'Please input your Username!' }]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email or phone number" />
+        <Input type='Email' prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email or phone number" />
       </Form.Item>
       
       <Form.Item
@@ -33,6 +35,7 @@ const App: React.FC = () => {
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
+          minLength={8}
           type="password"
           placeholder="Password"
         />
@@ -55,6 +58,7 @@ const App: React.FC = () => {
       </Form.Item>
     </Form>
     </center>
+    </Typography>
   );
 };
 

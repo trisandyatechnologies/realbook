@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { EnvironmentOutlined, HeatMapOutlined, LockOutlined, PhoneOutlined, UserOutlined, YuqueOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Flex, Form, Input, Typography } from 'antd';
 
 
 const App: React.FC = () => {
@@ -13,17 +13,20 @@ const App: React.FC = () => {
   };
 
   return (
+    <Typography style={{ backgroundImage:`url("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,height:'100vh'}}>
     <center style={{padding:'20px'}}>
+
     <Form 
-    
-    style={{ padding:'0 50px',background:" linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)", borderRadius:'20px',width:'500px',height:'500px'}}
+    style={{ padding:'0 50px',backgroundColor:'rgba(255,254,254,0.5)',backdropFilter:'blur(2px)', borderRadius:'20px',width:'500px',height:'450px'}}
       name="normal_login"
       className="login-form"
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
       <h1 style={{padding:'10px'}}> Signup</h1>
+      <Flex >
       <Form.Item
+      style={{marginRight:'5px'}}
         name="First Name"
         rules={[{ required: true, message: 'Please input your First Name!' }]}
       >
@@ -35,19 +38,17 @@ const App: React.FC = () => {
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Last Name" />
       </Form.Item>
-      <Form.Item
-      className='div'
-        name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
-      >
+      </Flex>
+     
          <Form.Item
         name="Email ore phone number"
-        rules={[{ required: true, message: ' email ore phone number!' }]}
+        rules={[{ required: true, message: ' email ' }]}
       >
-        <Input prefix={<PhoneOutlined  className="site-form-item-icon" />} placeholder="Email or Phone Number" />
+        <Input type='Email' prefix={<PhoneOutlined  className="site-form-item-icon" />} placeholder="Email " />
       </Form.Item>
-      
+      <Flex >
       <Form.Item
+      style={{marginRight:'5px'}}
         name="location"
         rules={[{ required: true, message: ' address!' }]}
       >
@@ -59,31 +60,38 @@ const App: React.FC = () => {
       >
         <Input prefix={<EnvironmentOutlined  className="site-form-item-icon" />} placeholder="Area"/>
       </Form.Item>
-      
+      </Flex>
+      <Form.Item
+      className='div'
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
         <Input
         style={{marginTop:'0'}}
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
+          minLength={8} 
           placeholder="Password"
         />
       </Form.Item>
       <Form.Item style={{marginLeft:'90%'}}>
         
 
-        <a className="login-form-forgot" href="/signin">
-          signin
+        <a className="login-form-forgot" style={{color:'black'}} href="/signin">
+          Signin
         </a>
       </Form.Item>
 
       <Form.Item >
-        <Button style={{width:'40%',backgroundColor:'#f69d3c'}}  htmlType="submit" >
-          signup
+        <Button   htmlType="submit" >
+          Signup
         </Button>
       
       </Form.Item>
     </Form>
     </center>
+    </Typography>
   );
 };
 
-export default App;
+export default App;   
