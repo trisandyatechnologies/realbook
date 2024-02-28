@@ -60,6 +60,7 @@ enum VentureCategory {
 model Venture {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  images      String[]
   description String
   address     Address
   startDate   DateTime?
