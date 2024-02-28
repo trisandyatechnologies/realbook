@@ -24,7 +24,7 @@ const contentStyle: React.CSSProperties = {
 
 const siderStyle: React.CSSProperties = {
   textAlign: "center",
-
+  width: "5%",
   backgroundColor: "white",
 };
 
@@ -50,7 +50,7 @@ export default function Dashboard() {
   return (
     <main>
       <Layout style={layoutStyle}>
-        <Sider width="15%" style={siderStyle}>
+        <Sider style={siderStyle}>
           <Siderpage />
         </Sider>
         <Layout>

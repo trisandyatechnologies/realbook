@@ -36,38 +36,42 @@ export default function Contentpage(props: { data: Prospect }) {
   } = theme.useToken();
   return (
     <main>
-      <Flex
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          padding: padding * 4,
-          margin: margin,
-        }}
-      >
-        {status?.map((item, i) => (
-          <Card style={{ width: 250, margin: margin }}>
-            <Flex>
-              <Flex vertical>
-                <Typography>Prospect For{item.status}</Typography>
-
-                <Typography>{item.range} </Typography>
-              </Flex>
-
-              <Flex gap="small" wrap="wrap">
-                <Progress
-                  size={50}
-                  type="circle"
-                  percent={20}
-                  // format={(percent) => `${percent}`}
-                />
-              </Flex>
-            </Flex>
-          </Card>
-        ))}
-      </Flex>
       <Row>
-        <Col xs={24} lg={12}></Col>
         <Col xs={24} lg={12}>
+          <Flex
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              padding: padding * 4,
+              margin: margin,
+            }}
+          >
+            {status?.map((item, i) => (
+              <Card style={{ width: 250, margin: margin }}>
+                <Flex>
+                  <Flex vertical>
+                    <Typography>Prospect For{item.status}</Typography>
+
+                    <Typography>{item.range} </Typography>
+                  </Flex>
+
+                  <Flex gap="small" wrap="wrap">
+                    <Progress
+                      size={50}
+                      type="circle"
+                      percent={20}
+                      // format={(percent) => `${percent}`}
+                    />
+                  </Flex>
+                </Flex>
+              </Card>
+            ))}
+          </Flex>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} lg={12}></Col>
+        <Col xs={12} lg={12}>
           {prospects?.map((prospect, i) => (
             <List itemLayout="vertical">
               <Space>
