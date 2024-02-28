@@ -29,3 +29,9 @@ export const getProspects = async () => {
 }
 };
  
+export const getProspectById = async (prospctId:string) => {
+const prospect = await fetch(`${API_ROOT}prospects/${prospctId}`,{
+cache:"no-cache",
+}).then((res) => res.json());
+return prospect;
+}
