@@ -15,14 +15,14 @@ const About = () => {
         <b>About Us</b>
       </Typography.Title>
       <Row style={{ padding: padding }}>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={11} xs={24}>
           <img
             style={{ width: "100%" }}
             src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </Col>
-        <Col lg={2} span={2}></Col>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={2}></Col>
+        <Col lg={11} xs={24}>
           <Typography.Title level={3}>Meet Our Team</Typography.Title>
           <Typography>
             Meet the dedicated professionals behind REALBOOK. Our team is
@@ -39,7 +39,7 @@ const About = () => {
         </Col>
       </Row>
       <Row style={{ padding: padding }}>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={11} xs={24}>
           <Typography.Title level={3}>Our Story</Typography.Title>
           <Typography>
             Established in 2024, REALBOOk has been a trusted name in the real
@@ -55,8 +55,8 @@ const About = () => {
             interaction, transaction, and decision we make.
           </Typography>
         </Col>
-        <Col lg={2} span={2}></Col>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={2}></Col>
+        <Col lg={11} xs={24}>
           <img
             style={{ width: "100%" }}
             src="https://img.freepik.com/free-photo/view-land-plot-real-estate-business-development_23-2149916736.jpg?t=st=1709095701~exp=1709099301~hmac=92dab5e1c2d2410fd56ecec7dbbc7d9616f1fff8edca3ce0896c0f243527cc44&w=996"
@@ -64,14 +64,14 @@ const About = () => {
         </Col>
       </Row>
       <Row style={{ padding: padding }}>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={11} xs={24}>
           <img
             style={{ width: "100%" }}
             src="https://images.unsplash.com/photo-1628133287836-40bd5453bed1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </Col>
-        <Col lg={2} span={2}></Col>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={2}></Col>
+        <Col lg={11} xs={24}>
           <Typography.Title level={3}>Community Involvement</Typography.Title>
           <Typography>
             At REALBOOK, we believe in giving back to the community that has
@@ -81,7 +81,7 @@ const About = () => {
         </Col>
       </Row>
       <Row style={{ padding: padding }}>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={11} xs={24}>
           <Typography.Title level={3}>
             Signup and Add Ventures:
           </Typography.Title>
@@ -122,8 +122,8 @@ const About = () => {
             conversion journey firsthand, celebrating successful deals.
           </Typography>
         </Col>
-        <Col lg={2} span={2}></Col>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={2}></Col>
+        <Col lg={11} xs={24}>
           <img
             style={{ width: "100%", height: 650 }}
             src="https://images.unsplash.com/photo-1580216643062-cf460548a66a?q=80&w=1867&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -131,14 +131,14 @@ const About = () => {
         </Col>
       </Row>
       <Row style={{ padding: padding }}>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={11} xs={24}>
           <img
             style={{ width: "100%", height: 600 }}
             src="https://images.unsplash.com/photo-1587745890135-20db8c79b027?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </Col>
-        <Col lg={2} span={2}></Col>
-        <Col lg={11} xs={24} span={11}>
+        <Col lg={2}></Col>
+        <Col lg={11} xs={24}>
           <Typography.Title level={3}>
             Signup and Explore Ventures:
           </Typography.Title>
