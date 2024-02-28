@@ -111,8 +111,8 @@ model Prospect {
   address    Address?
   status     ProspectStatus @default(Created)
   siteVisits SiteVisit[]
-  ventureId  String         @db.ObjectId
-  venture    Venture        @relation(fields: [ventureId], references: [id])
+  ventureId  String?        @db.ObjectId
+  venture    Venture?       @relation(fields: [ventureId], references: [id])
 }
 
 enum SiteVisitStatus {
