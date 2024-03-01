@@ -1,12 +1,14 @@
 import React from "react";
-import { Card, Divider, Flex, List, Space, Typography } from "antd";
+import { Card, Divider, Flex, List, Space, Typography, theme } from "antd";
 import { MediumCircleFilled } from "@ant-design/icons";
 import { Col, Row } from "antd";
 
-const App: React.FC = () => (
-  <Flex vertical style={{ padding: 20 }}>
+const App: React.FC = () => {
+
+  return (
+  <Flex vertical style={{ padding: 20}}>
     <Typography
-      style={{ textAlign: "center", textDecoration: "underline", fontSize: 36 }}
+      style={{ textAlign: "center", textDecoration: "underline", fontSize: 30 }}
     >
       <b>Privacy Policy for realbook</b>
     </Typography>
@@ -34,7 +36,7 @@ const App: React.FC = () => (
     </Typography>
     <Typography  style={{fontSize: 20}}>Definitions</Typography>
     <Typography style={{fontSize: 24}}>For the purposes of this Privacy Policy:</Typography>
-    <Typography style={{ marginLeft: "20px" }}>
+    <Typography style={{margin: 20}}>
       <li>
         {" "}
         Account means a unique account created for You to access our Service or
@@ -108,7 +110,7 @@ const App: React.FC = () => (
       identify You. Personally identifiable information may include, but is not
       limited to:
     </Typography>
-    <Typography style={{ marginLeft: "20px" }}>
+    <Typography style={{ marginLeft: 20 }}>
       <li>Email address</li>
       <li>First name and last name</li>
       <li>Phone number</li>
@@ -488,5 +490,5 @@ const App: React.FC = () => (
       <li>By visiting this page on our website: www.realbook</li>
     </Typography>
   </Flex>
-);
+)};
 export default App;
