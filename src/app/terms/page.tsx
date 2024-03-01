@@ -3,7 +3,7 @@ import { Card, Divider, Flex, List, Space, Typography, theme } from "antd";
 import { MediumCircleFilled } from "@ant-design/icons";
 import { Col, Row } from "antd";
 
-const App: React.FC = () => {
+const terms: React.FC = () => {
 
     return (
 
@@ -270,4 +270,4 @@ const App: React.FC = () => {
   </Flex>
 )};
 
-export default App;
+export default terms;
