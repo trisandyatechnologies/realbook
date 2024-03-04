@@ -54,8 +54,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   return (
     <Flex gap={padding / 2} style={{ padding }} className="image-upload">
       {images.map((path, i) => (
-        <Flex key={path} className="thumbnail">
+        <Flex key={path} className="thumbnail" justify="space-between" wrap="wrap">
+          <Button>
           <Image fill alt="Image" src={getImage(path)} />
+          </Button>
           <Button
             key="delete"
             icon={<DeleteOutlined />}

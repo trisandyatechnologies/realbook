@@ -1,49 +1,50 @@
 import { API_ROOT } from "@/utils/config";
-import { Venture } from "@prisma/client";
+import {  Project } from "@prisma/client";
 
-export const createVenture = async (VentureBody: Partial<Venture>) => {
-    const venture = await fetch(`${API_ROOT}ventures`, {
+export const createProject = async (ProjectBody:Project) => {
+    const project = await fetch(`${API_ROOT}projects`, {
         method: "POST",
-        body: JSON.stringify(VentureBody),
+        body: JSON.stringify(ProjectBody),
         headers: {
             "Content-Type": "application/json",
         },
     }).then((res) => res.json());
-    return venture;
+    return project;
 };
 
-export const getVentures = async () => {
-    const ventures = await fetch(`${API_ROOT}ventures`).then((res) => res.json());
-    return ventures;
+
+export const getProject = async () => {
+    const projects = await fetch(`${API_ROOT}projects`).then((res) => res.json());
+    return projects;
 };
 
-export const updateVenture = async (ventureId: string, updateBody: Partial<Venture>) => {
-    const venture = await fetch(`${API_ROOT}ventures/${ventureId}`, {
+export const updateProject = async (projectId: string, updateBody: Partial<Project>) => {
+    const project = await fetch(`${API_ROOT}projects/${projectId}`, {
         method: "PUT",
         body: JSON.stringify(updateBody),
         headers: {
             "Content-Type": "application/json",
         },
     }).then((res) => res.json());
-    return venture;
+    return project;
 };
 
-export const deleteVenture = async (ventureId: string) => {
+export const deleteProject = async (projectId: string) => {
     try {
-        const response = await fetch(`${API_ROOT}ventures/${ventureId}`, {
+        const response = await fetch(`${API_ROOT}projects/${projectId}`, {
             method: "DELETE",  
             headers: {
                 "Content-Type": "application/json",
             },
         });
         if (!response.ok) {
-            throw new Error(`Failed to delete venture: ${response.status} - ${response.statusText}`);
+            throw new Error(`Failed to delete project: ${response.status} - ${response.statusText}`);
         }
-        const venture = await response.json();
-        return venture;
+        const project = await response.json();
+        return project;
     } 
     catch (error) {
-        console.error("Error creating venture:");
+        console.error("Error creating project:");
         throw error;
     }
 };

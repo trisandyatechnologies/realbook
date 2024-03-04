@@ -2,9 +2,9 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
-  const ventureBody = await req.json();
-  const venture = await prisma.venture.create({
-    data: ventureBody, //{
+  const ProjectBody = await req.json();
+  const project = await prisma.project.create({
+    data: ProjectBody, //{
     // user: {
     //   connect: {
     //     id: ventureBody.userId,
@@ -12,9 +12,9 @@ export async function POST(req: Request, res: Response) {
     // },
     //},
   });
-  return NextResponse.json(venture);
+  return NextResponse.json(project);
 }
 export async function GET(req: Request, res: Response) {
-  const ventures = await prisma.venture.findMany({});
-  return NextResponse.json(ventures);
+  const projects = await prisma.project.findMany({});
+  return NextResponse.json(projects);
 }
