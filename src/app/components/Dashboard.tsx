@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Layout, Flex, theme } from "antd";
+import { Layout, Flex, theme, Typography, Col } from "antd";
 import HeaderPage from "./Header";
 import Siderpage from "./Sider";
 import Contentpage from "./Content";
@@ -50,9 +50,12 @@ export default function Dashboard() {
   return (
     <main>
       <Layout style={layoutStyle}>
-        <Sider style={siderStyle}>
-          <Siderpage />
-        </Sider>
+        <Col xs={0} lg={3}>
+          <Sider style={siderStyle}>
+            <Typography.Title level={2}>REAL BOOK</Typography.Title>
+            <Siderpage />
+          </Sider>
+        </Col>
         <Layout>
           <Header style={headerStyle}>
             <HeaderPage />

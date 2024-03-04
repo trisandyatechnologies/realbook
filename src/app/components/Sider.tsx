@@ -47,7 +47,7 @@ const Siderpage: React.FC = () => (
     <Col xs={5} lg={12}>
       <List
         itemLayout="horizontal"
-        style={{ marginTop: 120  }}
+        // style={{ marginTop: 30 }}
         dataSource={data}
         renderItem={(item, index) => (
           <List.Item>
