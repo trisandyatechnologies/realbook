@@ -29,7 +29,7 @@ model User {
   phone         String    @unique
   password      String?
   loginType     LoginType @default(Normal)
-  address       Address
+  address       Address?     
   role          Role      @default(User)
 
   projectIds String[]  @db.ObjectId
