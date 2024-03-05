@@ -9,16 +9,25 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+enum LoginType {
+  Normal
+  GitHub
+  Gmail
+  Facebook
+}
+
 model User {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  email         String? @unique
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?
   emailVerified Boolean @default(false)
   phone         String  @unique
-  password      String?
-  
+  LoginType     LoginType @default(Normal)
+  Addresses     String 
 }
+

@@ -112,19 +112,19 @@ export default function Signup () {
         
 
           <Content className="p-0">
-            <div className="sign-up-header">
-              <div className="content">
+            <Typography className="sign-up-header">
+              <Typography className="content">
                 <Title>Sign Up</Title>
-                <p className="text-lg">
+                <Typography className="text-lg">
                   Use these awesome forms to login or create new account in your
                   project for free.
-                </p>
-              </div>
-            </div>
+                </Typography>
+              </Typography>
+            </Typography>
 
             <Card
               className="card-signup header-solid h-full ant-card pt-0"
-              title={<h5>Register With</h5>}
+              title={<>Register With</>}
         
             >
               <Typography className="sign-up-gateways">
@@ -184,6 +184,7 @@ export default function Signup () {
                   <Button
                     style={{ width: "100%" }}
                     type="primary"
+                    
                     htmlType="submit"
                   >
                     SIGN UP
@@ -192,7 +193,7 @@ export default function Signup () {
               </Form>
               <p className="font-semibold text-muted text-center">
                 Already have an account?{" "}
-                <Link href="/sign-in" className="font-bold text-dark">
+                <Link href="/signin" className="font-bold text-dark">
                   Sign In
                 </Link>
               </p>
