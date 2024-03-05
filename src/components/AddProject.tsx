@@ -100,70 +100,70 @@ const onFinish = async(values: any) => {
             <Form.Item
             label="Street"
             name={["address", "street"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your street Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Street name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Village"
             name={["address", "village"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your village Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="village name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="City"
             name={["address", "city"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your city Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="City name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="State"
             name={["address", "state"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your state Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="State name"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Country"
             name={["address", "country"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your country Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Country name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Survey No"
             name={["address", "survey"]}
-            rules={[{ required: false, message: "Please input your Name!" }]}
+            rules={[{ required: false, message: "Please input your survey no!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Survey no "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Land mark"
             name={["address", "landmark"]}
-            rules={[{ required: false, message: "Please input your Name!" }]}
+            rules={[{ required: false, message: "Please input your Land mark!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Enter land mark"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
