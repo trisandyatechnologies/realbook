@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -21,13 +21,124 @@ enum LoginType {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  image         String?
   email         String?   @unique
+  emailVerified Boolean   @default(false)
+  phone         String    @unique
   password      String?
-  emailVerified Boolean @default(false)
-  phone         String  @unique
-  LoginType     LoginType @default(Normal)
-  Addresses     String 
+  loginType     LoginType @default(Normal)
+  address       Address
+  role          Role      @default(User)
+
+  projectIds String[]  @db.ObjectId
+  projectss   Project[] @relation("projectAgent", fields: [projectIds], references: [id])
+
+  ownedProjects Project[] @relation("projectOwnership")
+
+  siteVisits SiteVisit[]
 }
 
+enum Role {
+  Admin
+  Agent
+  User
+}
+
+enum ProjectCategory {
+  Villas
+  Individual_Houses
+  Apartments
+  Plots
+  Grouped_House
+  Gated_Community
+  Semi_Gated_Community
+  Standalone_Building
+	@@map("ProjectCategory")
+}
+
+model Project {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  images      String[]
+  description String
+  address     Address
+  startDate   DateTime?
+  status      ProjectStatus@default(Available)
+
+  location  String?
+  category  ProjectCategory
+  units     Int
+  soldUnits Int
+
+  ownerId String? @db.ObjectId
+  owner   User?   @relation("projectOwnership", fields: [ownerId], references: [id])
+
+  agentIds String[]   @db.ObjectId
+  agents   User[]     @relation("projectAgent", fields: [agentIds], references: [id])
+  Prospect Prospect[]
+	@@map("Project")
+}
+
+type Address {
+  street   String
+  village  String
+  city     String
+  state    String
+  country  String
+  survey   String? // Survey Number
+  landmark String?
+}
+
+enum ProspectStatus {
+  Created // Just added the record
+  Site_Visit // In Site Visit state
+  Pending // Pending from prospect
+  Interested // Covert to buy
+  NotInterested // No more a prospect
+  Bought // Success
+  Dropped // Dropped somewhere in the progress
+  Absconded // Not reachable
+}
+
+enum ProjectStatus {
+  Available
+  Sold_Out
+}
+
+model Prospect {
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  phone      String
+  address    Address?
+  status     ProspectStatus @default(Created)
+  siteVisits SiteVisit[]
+  projectId  String         @db.ObjectId
+  project    Project        @relation(fields: [projectId], references: [id])
+}
+
+enum SiteVisitStatus {
+  Requested
+  Rejected
+  Accepted
+  VehicleAllocated
+  Scheduled
+  InProgress
+  Success
+  Failure
+}
+
+model SiteVisit {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  prospectId String   @db.ObjectId
+  prospect   Prospect @relation(fields: [prospectId], references: [id])
+
+  agentId String @db.ObjectId
+  agent   User   @relation(fields: [agentId], references: [id])
+
+  status SiteVisitStatus @default(Requested)
+
+  address Address?
+}
