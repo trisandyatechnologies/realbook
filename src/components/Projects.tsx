@@ -34,8 +34,8 @@ useEffect(()=>{
         >
           <Flex justify="space-between">
             <Typography>{project.title}</Typography>
-              <Typography>{project.units} units</Typography>
-              <Typography>{project.soldUnits} sold units</Typography>
+              <Typography>{project.units} Available units</Typography>
+              <Typography>{project.soldUnits}  Units Sold</Typography>
               <Typography>prospects</Typography>
           </Flex>
         </Card>
