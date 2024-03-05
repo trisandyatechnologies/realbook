@@ -32,10 +32,10 @@ model User {
   address       Address
   role          Role      @default(User)
 
-  ventureIds String[]  @db.ObjectId
-  ventures   Venture[] @relation("ventureAgent", fields: [ventureIds], references: [id])
+  projectIds String[]  @db.ObjectId
+  projectss   Project[] @relation("projectAgent", fields: [projectIds], references: [id])
 
-  ownedVentures Venture[] @relation("ventureOwnership")
+  ownedProjects Project[] @relation("projectOwnership")
 
   siteVisits SiteVisit[]
 }
@@ -46,7 +46,7 @@ enum Role {
   User
 }
 
-enum VentureCategory {
+enum ProjectCategory {
   Villas
   Individual_Houses
   Apartments
@@ -55,27 +55,30 @@ enum VentureCategory {
   Gated_Community
   Semi_Gated_Community
   Standalone_Building
+	@@map("ProjectCategory")
 }
 
-model Venture {
+model Project {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   title       String
+  images      String[]
   description String
   address     Address
   startDate   DateTime?
-  status      VentureStatus @default(Available)
+  status      ProjectStatus@default(Available)
 
   location  String?
-  category  VentureCategory
+  category  ProjectCategory
   units     Int
   soldUnits Int
 
   ownerId String? @db.ObjectId
-  owner   User?   @relation("ventureOwnership", fields: [ownerId], references: [id])
+  owner   User?   @relation("projectOwnership", fields: [ownerId], references: [id])
 
   agentIds String[]   @db.ObjectId
-  agents   User[]     @relation("ventureAgent", fields: [agentIds], references: [id])
+  agents   User[]     @relation("projectAgent", fields: [agentIds], references: [id])
   Prospect Prospect[]
+	@@map("Project")
 }
 
 type Address {
@@ -99,7 +102,7 @@ enum ProspectStatus {
   Absconded // Not reachable
 }
 
-enum VentureStatus {
+enum ProjectStatus {
   Available
   Sold_Out
 }
@@ -111,8 +114,8 @@ model Prospect {
   address    Address?
   status     ProspectStatus @default(Created)
   siteVisits SiteVisit[]
-  ventureId  String         @db.ObjectId
-  venture    Venture        @relation(fields: [ventureId], references: [id])
+  projectId  String         @db.ObjectId
+  project    Project        @relation(fields: [projectId], references: [id])
 }
 
 enum SiteVisitStatus {
