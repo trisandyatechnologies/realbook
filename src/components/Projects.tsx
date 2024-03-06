@@ -26,13 +26,14 @@ useEffect(()=>{
           Add Project
         </Button>
       </Flex>
-      <Flex justify="center">
+      <Flex justify="center" vertical align="center">
      {projects.map((project,i) =>(
         <Card
           bordered={false}
-          style={{ maxWidth: "650px", width: "100%", padding: 10 }}
+          style={{ maxWidth: "650px", width: "100%",marginTop:20}}
+          
         >
-          <Flex justify="space-between">
+          <Flex justify="space-between" >
             <Typography>{project.title}</Typography>
               <Typography>{project.units} Available units</Typography>
               <Typography>{project.soldUnits}  Units Sold</Typography>
