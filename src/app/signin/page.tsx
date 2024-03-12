@@ -1,6 +1,6 @@
 'use client'
 import "./sign.css";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Layout,
   Menu,
@@ -19,6 +19,9 @@ import {
   GithubOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { message } from "@/lib/notify";
 function onChange(checked:any) {
   console.log(`switch to ${checked}`);
 }
@@ -106,13 +109,27 @@ const signin = [
 ];
 export default function Signin () {
   
-    const onFinish = (values:any) => {
-      console.log("Success:", values);
-    };
+  const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace(searchParams.get("redirect") ?? "/");
+    }
+  }, [session, status]);
 
-    const onFinishFailed = (errorInfo:any) => {
-      console.log("Failed:", errorInfo);
-    };
+  const onFinish = async (values: any) => {
+    const { error: err, status } = (await signIn("credentials", {
+      redirect: false,
+      ...values,
+    })) ?? { error: true };
+    if (err || status === 401) {
+      message.error("Email or password incorrect.");
+    } else {
+      router.replace(searchParams.get("redirect") ?? "/");
+    }
+  };
+
     return (
       <>
         <Layout style={{backgroundImage:`url:("https://images.unsplash.com/photo-1500175173636-75508e87b107?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`}} className="layout-default layout-signin">
@@ -130,7 +147,6 @@ export default function Signin () {
                 </Title>
                 <Form
                   onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
                   layout="vertical"
                   className="row-col"
                 >
@@ -159,7 +175,7 @@ export default function Signin () {
                       },
                     ]}
                   >
-                    <Input minLength={8} placeholder="Password" />
+                    <Input minLength={8} placeholder="Password" type="password"/>
                   </Form.Item>
 
                   <Form.Item

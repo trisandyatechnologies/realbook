@@ -32,13 +32,10 @@ export default function AddingProspect() {
     <Flex
       justify="center"
       style={{
-        backgroundImage: `url("/bgi4.jpg")`,
-        backgroundRepeat: "no-repeat",
         width: "100%",
         height: "100%",
       }}
     >
-      {/* <Flex><UserOutlined/></Flex> */}
      
       <Card
         style={{
@@ -84,14 +81,6 @@ export default function AddingProspect() {
           >
             <Input style={{ borderRadius: 5 }} />
           </Form.Item>
-
-          {/* <Form.Item
-        label="Address"
-        name="address"
-        rules={[{ required: false, message: "Please input!" }]}
-      >
-        <Input />
-      </Form.Item> */}
           <Form.Item
             label="Status"
             name="status"
@@ -106,81 +95,81 @@ export default function AddingProspect() {
           >
             <Input style={{ borderRadius: 5 }} />
           </Form.Item>
-          {/*  */}
+         
           <Form.Item
             label="Street"
             name={["address", "street"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your street Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Street name"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Village"
             name={["address", "village"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your village Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Village name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="City"
             name={["address", "city"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your City Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="city name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="State"
             name={["address", "state"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your state Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="State name"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Country"
             name={["address", "country"]}
-            rules={[{ required: true, message: "Please input your Name!" }]}
+            rules={[{ required: true, message: "Please input your country Name!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Country name "
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Survey No"
             name={["address", "survey"]}
-            rules={[{ required: false, message: "Please input your Name!" }]}
+            rules={[{ required: false, message: "Please input your Surver no!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder="Survey no"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
           <Form.Item
             label="Land mark"
             name={["address", "landmark"]}
-            rules={[{ required: false, message: "Please input your Name!" }]}
+            rules={[{ required: false, message: "Please input your Landmark!" }]}
           >
             <Input
-              placeholder="Street name / Place name"
+              placeholder=" Enter landmark"
               style={{ borderRadius: 5 }}
             />
           </Form.Item>
-          {/*  */}
+          
 
           <Form.Item
-            //wrapperCol={{ offset: 11, span: 15 }}
+            
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Button type="primary" htmlType="submit" style={{ width: 90 }}>

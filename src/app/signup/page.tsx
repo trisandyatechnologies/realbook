@@ -1,6 +1,6 @@
 'use client';
 import "./auth.css";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Layout,
   Menu,
@@ -24,6 +24,10 @@ import {
   AppleOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+
+import { signIn, useSession } from "next-auth/react";
+import { message } from "@/lib/notify";
+import { useRouter } from "next/navigation";
 
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
@@ -98,14 +102,30 @@ const signup = [
   
 export default function Signup () {
   
-  
-    const onFinish = (values:any) => {
-      console.log("Success:", values);
-    };
+  const router = useRouter();
 
-    const onFinishFailed = (errorInfo:any) => {
-      console.log("Failed:", errorInfo);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/");
     }
+  }, [session, status]);
+
+  const onFinish = async (values: any) => {
+    const { error: err } = (await signIn("credentials", {isRegister:true,
+      redirect: false,
+      ...values,
+    })) ?? { error: true };
+    if (err) {
+      message.error("Failed to create account, email/phone already exists.");
+    } else {
+      router.replace("/");
+    }
+  };
+
+
+   
     return (
       <>
         <Layout className="layout-default ant-layout layout-sign-up">
@@ -115,10 +135,6 @@ export default function Signup () {
             <Typography className="sign-up-header">
               <Typography className="content">
                 <Title>Sign Up</Title>
-                <Typography className="text-lg">
-                  Use these awesome forms to login or create new account in your
-                  project for free.
-                </Typography>
               </Typography>
             </Typography>
 
@@ -143,11 +159,11 @@ export default function Signup () {
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                
                 className="row-col"
               >
                 <Form.Item
-                  name="Name"
+                  name="name"
                   rules={[
                     { required: true, message: "Please input your username!" },
                   ]}
@@ -163,12 +179,20 @@ export default function Signup () {
                   <Input type="email" placeholder="email" />
                 </Form.Item>
                 <Form.Item
+                  name="phone"
+                  rules={[
+                    { required: true, message: "Please input your phone number!" },
+                  ]}
+                >
+                  <Input type="number" placeholder="phone number" />
+                </Form.Item>
+                <Form.Item
                   name="password"
                   rules={[
                     { required: true, message: "Please input your password!" },
                   ]}
                 >
-                  <Input minLength={8} placeholder="Passwoed" />
+                  <Input minLength={8} placeholder="Password" type="password" />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">
