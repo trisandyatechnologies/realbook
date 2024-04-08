@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Button, Card, Flex, theme } from "antd";
@@ -6,8 +5,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { UploadOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { getImage } from "@/app/utils/util";
-
+import { getImage } from "@/utils/util";
 
 interface ImageUploadProps {
   disabled?: boolean;
@@ -54,9 +52,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   return (
     <Flex gap={padding / 2} style={{ padding }} className="image-upload">
       {images.map((path, i) => (
-        <Flex key={path} className="thumbnail" justify="space-between" wrap="wrap">
+        <Flex
+          key={path}
+          className="thumbnail"
+          justify="space-between"
+          wrap="wrap"
+        >
           <Button>
-          <Image fill alt="Image" src={getImage(path)} />
+            <Image fill alt="Image" src={getImage(path)} />
           </Button>
           <Button
             key="delete"

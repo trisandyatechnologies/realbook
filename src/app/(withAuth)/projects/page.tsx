@@ -1,6 +1,5 @@
-
 import Projects from "@/components/Projects";
 
-export default function venture() {
+export default function ProjectsPage() {
   return <Projects />;
 }

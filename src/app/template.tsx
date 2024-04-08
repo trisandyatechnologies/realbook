@@ -1,15 +1,9 @@
 "use client";
 import { App, ConfigProvider, Grid, Skeleton, theme } from "antd";
 import Notify from "@/lib/notify";
-import { Layout, Flex, Typography } from "antd";
 import { SessionProvider } from "next-auth/react";
-import HeaderMenu from "@/components/Header";
-const { Content } = Layout;
-
-const layoutStyle = {
-  overflow: "hidden",
-  width: "100%",
-};
+import "../styles/main.css";
+import "../styles/responsive.css";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const {
@@ -27,22 +21,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         },
       }}
     >
-      <App >
+      <App>
         <Notify />
-        <SessionProvider>
-          <Layout style={{ ...layoutStyle, background: colorBgContainer }}>
-            <HeaderMenu/>
-            <Content
-              style={{
-               minHeight: `calc(100vh )`,
-                
-              }}
-            >
-              {children}
-            </Content>
-            {/* <Footer /> */}
-          </Layout>
-        </SessionProvider>
+        <SessionProvider>{children}</SessionProvider>
       </App>
     </ConfigProvider>
   );
