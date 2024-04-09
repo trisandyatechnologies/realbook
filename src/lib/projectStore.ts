@@ -1,8 +1,7 @@
-
 import { create } from "zustand";
 import { message } from "antd";
-import {  Project } from "@prisma/client";
-import { getProject, updateProject } from "./api";
+import { Project } from "@prisma/client";
+import { getProjects, updateProject } from "./api";
 
 interface ProjectStore {
   projects: Project[];
@@ -15,7 +14,7 @@ interface ProjectStore {
 export const useProjectStore = create<ProjectStore>((set, get) => ({
   projects: [],
   setProjects: async () => {
-    const projects = await getProject();
+    const projects = await getProjects();
     set({ projects: projects });
   },
   updatedProject: async (id: string, update: Partial<Project>) => {

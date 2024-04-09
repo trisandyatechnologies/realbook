@@ -1,109 +1,63 @@
-import { API_ROOT } from "@/app/utils/config";
+import { API_ROOT } from "@/utils/config";
 import { Prospect, User } from "@prisma/client";
-import {  Project } from "@prisma/client";
+import { Project } from "@prisma/client";
+import api from "./axios";
 
-
-export const createProspect = async (prospectBody: Prospect) => {
-  try {
-    const response = await fetch(`${API_ROOT}prospects`, {
-      method: "POST",
-      body: JSON.stringify(prospectBody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    }
-  } catch (error) {
-    console.error("Error creating prospect:", error);
-  }
+export const createProspect = async (body: Prospect) => {
+  const response = await api.post<Prospect>(`${API_ROOT}prospects`, {
+    body,
+  });
+  return response.data;
 };
 
 export const getProspects = async () => {
-  try{
-  const prospects = await fetch(`${API_ROOT}prospects`).then((res) => res.json());
-  return prospects;
-}catch (error) {
-  console.error('Error fetching data:', error);
-  throw error;
-}
-};
- 
-export const getProspectById = async (prospctId:string) => {
-const prospect = await fetch(`${API_ROOT}prospects/${prospctId}`,{
-cache:"no-cache",
-}).then((res) => res.json());
-return prospect;
-}
-
-
-export const createProject = async (ProjectBody:Project) => {
-    const project = await fetch(`${API_ROOT}projects`, {
-        method: "POST",
-        body: JSON.stringify(ProjectBody),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((res) => res.json());
-    return project;
+  const res = await api.get<Prospect[]>(`${API_ROOT}prospects`);
+  return res.data;
 };
 
-
-export const getProject = async () => {
-    const projects = await fetch(`${API_ROOT}projects`).then((res) => res.json());
-    return projects;
+export const getProspectById = async (prospctId: string) => {
+  const res = await api.get<Prospect>(`${API_ROOT}prospects/${prospctId}`);
+  return res.data;
 };
 
-export const updateProject = async (projectId: string, updateBody: Partial<Project>) => {
-    const project = await fetch(`${API_ROOT}projects/${projectId}`, {
-        method: "PUT",
-        body: JSON.stringify(updateBody),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((res) => res.json());
-    return project;
+export const createProject = async (body: Project) => {
+  const res = await api.post<Project>(`${API_ROOT}projects`, {
+    body,
+  });
+  return res.data;
+};
+
+export const getProjects = async () => {
+  const res = await api.get<Project[]>(`${API_ROOT}projects`);
+  return res.data;
+};
+
+export const updateProject = async (
+  projectId: string,
+  body: Partial<Project>
+) => {
+  const res = await api.put<Project>(`${API_ROOT}projects/${projectId}`, {
+    body,
+  });
+  return res.data;
 };
 
 export const deleteProject = async (projectId: string) => {
-    try {
-        const response = await fetch(`${API_ROOT}projects/${projectId}`, {
-            method: "DELETE",  
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        if (!response.ok) {
-            throw new Error(`Failed to delete project: ${response.status} - ${response.statusText}`);
-        }
-        const project = await response.json();
-        return project;
-    } 
-    catch (error) {
-        console.error("Error creating project:");
-        throw error;
-    }
+  const res = await api.delete<Project>(`${API_ROOT}projects/${projectId}`);
+  return res.data;
 };
 
 export const getUser = async (userId: string) => {
-    const user = await fetch(`${API_ROOT}users/${userId}`).then((res) =>
-      res.json()
-    );
-    return user;
-  };
-  
-  export const updateUser = async (
-    userId: string,
-    updateBody: Partial<User>
-  ): Promise<User> => {
-    const user = await fetch(`${API_ROOT}users/${userId}`, {
-      method: "PUT",
-      body: JSON.stringify(updateBody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
-    return user;
-  };
+  const res = await api.get<User>(`${API_ROOT}users/${userId}`);
+  return res.data;
+};
+
+export const updateUser = async (
+  userId: string,
+  body: Partial<User>
+): Promise<User> => {
+  const res = await api.put<User>(`${API_ROOT}users/${userId}`, {
+    body,
+  });
+  return res.data;
+};
