@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -21,7 +21,10 @@ enum LoginType {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
   name          String
   image         String?
   email         String?   @unique
@@ -29,15 +32,65 @@ model User {
   phone         String    @unique
   password      String?
   loginType     LoginType @default(Normal)
-  address       Address?     
+  address       Json?
   role          Role      @default(User)
 
-  projectIds String[]  @db.ObjectId
-  projectss   Project[] @relation("projectAgent", fields: [projectIds], references: [id])
+  companies Company[] @relation("companyOwner")
+  agencies  Agency[]  @relation("agencyOwner")
 
-  ownedProjects Project[] @relation("projectOwnership")
+  agent Agent?
+}
 
-  siteVisits SiteVisit[]
+model Agent {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  // profile content
+  location  String?
+  job       String?
+  education String?
+  bio       String?
+  image     String?
+  cover     String?
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  agencies Agency[] @relation("agencyAgents")
+
+  // Companies this agent working/worked
+  companies Company[] @relation("companyAgents")
+
+  // Projects this aget working for
+  projects Project[] @relation("projectAgents")
+
+  prospects Prospect[]
+}
+
+model Agency {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  name    String
+  logo    String?
+  email   String? @unique
+  phone   String? @unique
+  address Json?
+
+  owner   User   @relation("agencyOwner", fields: [ownerId], references: [id])
+  ownerId String
+
+  agents Agent[] @relation("agencyAgents")
+
+  // Companies this agency working for
+  companies Company[] @relation("companyAgencies")
+
+  // Projects this agency working for
+  projects Project[] @relation("projectAgencies")
+
+  prospects Prospect[]
 }
 
 enum Role {
@@ -51,44 +104,62 @@ enum ProjectCategory {
   Individual_Houses
   Apartments
   Plots
-  Grouped_House
+  Grouped_Houses
   Gated_Community
   Semi_Gated_Community
   Standalone_Building
-	@@map("ProjectCategory")
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  name    String
+  logo    String?
+  email   String? @unique
+  phone   String? @unique
+  address Json?
+
+  owner   User   @relation("companyOwner", fields: [ownerId], references: [id])
+  ownerId String
+
+  projects Project[]
+
+  // Agencies this company hired
+  agencies Agency[] @relation("companyAgencies")
+
+  // Agents this company hired
+  agents Agent[] @relation("companyAgents")
 }
 
 model Project {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  name        String
   images      String[]
   description String
-  address     Address
+  address     Json
   startDate   DateTime?
-  status      ProjectStatus@default(Available)
+  status      ProjectStatus @default(Available)
 
   location  String?
   category  ProjectCategory
-  units     Int
-  soldUnits Int
+  units     Int             @default(1)
+  soldUnits Int             @default(0)
 
-  ownerId String? @db.ObjectId
-  owner   User?   @relation("projectOwnership", fields: [ownerId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
 
-  agentIds String[]   @db.ObjectId
-  agents   User[]     @relation("projectAgent", fields: [agentIds], references: [id])
-  Prospect Prospect[]
-	@@map("Project")
-}
+  // Agenices working for this project
+  agencies Agency[] @relation("projectAgencies")
 
-type Address {
-  street   String
-  village  String
-  city     String
-  state    String
-  country  String
-  survey   String? // Survey Number
-  landmark String?
+  // Agents working for this project
+  agents Agent[] @relation("projectAgents")
+
+  prospects Prospect[] @relation("projectProspects")
 }
 
 enum ProspectStatus {
@@ -108,14 +179,24 @@ enum ProjectStatus {
 }
 
 model Prospect {
-  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
   name       String
-  phone      String
-  address    Address?
+  phone      String?        @unique
+  email      String?        @unique
+  address    Json?
   status     ProspectStatus @default(Created)
   siteVisits SiteVisit[]
-  projectId  String         @db.ObjectId
-  project    Project        @relation(fields: [projectId], references: [id])
+
+  project   Project @relation("projectProspects", fields: [projectId], references: [id])
+  projectId String
+
+  agent    Agent?  @relation(fields: [agentId], references: [id])
+  agentId  String?
+  agency   Agency? @relation(fields: [agencyId], references: [id])
+  agencyId String?
 }
 
 enum SiteVisitStatus {
@@ -130,15 +211,10 @@ enum SiteVisitStatus {
 }
 
 model SiteVisit {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
 
-  prospectId String   @db.ObjectId
   prospect   Prospect @relation(fields: [prospectId], references: [id])
-
-  agentId String @db.ObjectId
-  agent   User   @relation(fields: [agentId], references: [id])
+  prospectId String
 
   status SiteVisitStatus @default(Requested)
-
-  address Address?
 }
