@@ -1,4 +1,3 @@
-
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -38,10 +37,10 @@ export async function PATCH(req: Request, { params }: ProspectsParams) {
 }
 
 export async function DELETE(req: Request, { params }: ProspectsParams) {
-    const prospect = await prisma.prospect.delete({
-      where: {
-        id: params.prospectId,
-      },
-    });
-    return NextResponse.json(prospect);
-  }
+  const prospect = await prisma.prospect.delete({
+    where: {
+      id: params.prospectId,
+    },
+  });
+  return NextResponse.json(prospect);
+}

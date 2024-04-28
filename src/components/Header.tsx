@@ -1,12 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Dropdown,
-  Flex,
-  Grid,
-  Space,
-  Typography,
-} from "antd";
+import { Dropdown, Flex, Grid, Space, Typography } from "antd";
 import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import {
@@ -21,12 +15,11 @@ import Title from "antd/es/skeleton/Title";
 
 const { useToken } = theme;
 
-
 const HeaderMenu: React.FC = () => {
   const { md } = Grid.useBreakpoint();
 
   const { data: session, status } = useSession();
- 
+
   const isLoggedIn = session?.user.id;
 
   const { setUser, reset, user } = useUserStore((s) => s);
@@ -37,7 +30,6 @@ const HeaderMenu: React.FC = () => {
       setUser(session?.user.id);
     }
   }, [session?.user.id, status]);
-
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -80,37 +72,43 @@ const HeaderMenu: React.FC = () => {
           {isLoggedIn ? (
             <Dropdown menu={{ items: profileMenuItems }}>
               {md ? (
-                <Typography style={{color:"white"}}>{session?.user.name}</Typography>
+                <Typography style={{ color: "white" }}>
+                  {session?.user.name}
+                </Typography>
               ) : (
-                <UserOutlined  />
+                <UserOutlined />
               )}
             </Dropdown>
           ) : (
-            <Link href="/signin" style={{color:"white",fontSize:20}}>Signin</Link>
+            <Link href="/signin" style={{ color: "white", fontSize: 20 }}>
+              Signin
+            </Link>
           )}
         </Space>
       ),
     },
-    
   ];
 
   return (
-    <Flex justify="space-between" style={{backgroundColor:"blue",padding:10}}>
-    
-    <Typography.Title style={{color:"white",marginBottom:0}}>REAL BOOK</Typography.Title>
-    <Menu
-      mode="horizontal"
-      items={items}
-      style={{
-        // flex: md ? 1 : 0,
-        // justifyContent: "end",
-        border: "none",
-        display: "flex",
-        backgroundColor:"blue"
-      }}
-      disabledOverflow
-      
-    />
+    <Flex
+      justify="space-between"
+      style={{ backgroundColor: "blue", padding: 10 }}
+    >
+      <Typography.Title style={{ color: "white", marginBottom: 0 }}>
+        REAL BOOK
+      </Typography.Title>
+      <Menu
+        mode="horizontal"
+        items={items}
+        style={{
+          // flex: md ? 1 : 0,
+          // justifyContent: "end",
+          border: "none",
+          display: "flex",
+          backgroundColor: "blue",
+        }}
+        disabledOverflow
+      />
     </Flex>
   );
 };

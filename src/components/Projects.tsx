@@ -34,7 +34,7 @@ const Projects: React.FC = () => {
             key={project.id}
           >
             <Flex justify="space-between">
-              <Typography>{project.title}</Typography>
+              <Typography>{project.name}</Typography>
               <Typography>{project.units} Available units</Typography>
               <Typography>{project.soldUnits} Units Sold</Typography>
               <Typography>prospects</Typography>

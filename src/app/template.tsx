@@ -1,5 +1,5 @@
 "use client";
-import { App, ConfigProvider, Grid, Skeleton, theme } from "antd";
+import { App, ConfigProvider, Grid, theme } from "antd";
 import Notify from "@/lib/notify";
 import { SessionProvider } from "next-auth/react";
 import "../styles/main.css";

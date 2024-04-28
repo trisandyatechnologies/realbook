@@ -95,9 +95,9 @@ export default function Signup() {
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>
               I agree the{" "}
-              <a href="#pablo" className="font-bold text-dark">
+              <Link href="/terms" className="font-bold text-dark">
                 Terms and Conditions
-              </a>
+              </Link>
             </Checkbox>
           </Form.Item>
 

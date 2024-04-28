@@ -33,7 +33,7 @@ export default function Signin() {
     if (status === "authenticated") {
       router.replace(searchParams.get("redirect") ?? "/");
     }
-  }, [session, status]);
+  }, [session, status, router, searchParams]);
 
   const onFinish = async (values: any) => {
     const { error: err, status } = (await signIn("credentials", {

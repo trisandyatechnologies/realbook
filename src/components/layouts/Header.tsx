@@ -92,9 +92,9 @@ export default function Header({ placement, onPress }: HeaderProps) {
 
   return (
     <>
-      <Button className="setting-drwer" onClick={showDrawer}>
+      {/* <Button className="setting-drwer" onClick={showDrawer}>
         <SettingFilled />
-      </Button>
+      </Button> */}
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
           <Breadcrumb items={navItems} />

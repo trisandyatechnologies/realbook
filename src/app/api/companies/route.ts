@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
   const data = await req.json();
-  const project = await prisma.project.create({
+  const company = await prisma.company.create({
     data,
   });
-  return NextResponse.json(project);
+  return NextResponse.json(company);
 }
 
 export async function GET(req: Request, res: Response) {
-  const projects = await prisma.project.findMany({});
-  return NextResponse.json(projects);
+  const companys = await prisma.company.findMany({});
+  return NextResponse.json(companys);
 }
