@@ -145,10 +145,10 @@ model Project {
   startDate   DateTime?
   status      ProjectStatus @default(Available)
 
-  location  String?
-  category  ProjectCategory
-  units     Int             @default(1)
-  soldUnits Int             @default(0)
+  location      String?
+  category      ProjectCategory
+  unitCount     Int             @default(1)
+  soldUnitCount Int             @default(0)
 
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
@@ -160,6 +160,7 @@ model Project {
   agents Agent[] @relation("projectAgents")
 
   prospects Prospect[] @relation("projectProspects")
+  units     Unit[]     @relation("projectUnits")
 }
 
 enum ProspectStatus {
@@ -217,4 +218,49 @@ model SiteVisit {
   prospectId String
 
   status SiteVisitStatus @default(Requested)
+}
+
+enum Facing {
+  East
+  West
+  North
+  South
+  NorthEast
+  SouthWest
+  SouthEast
+  NorthWest
+}
+
+enum UnitStatus {
+  Available
+  Unavailable
+  SoldOut
+  Pending
+  Blocked
+}
+
+enum SizeUnit {
+  SFT
+  SQRD
+  ACRE
+  GUNTA
+  CENT
+  HECTARE
+}
+
+model Unit {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  name     String?
+  facing   Facing
+  status   UnitStatus @default(Available)
+  size     Float      @default(1)
+  sizeUnit SizeUnit   @default(SFT)
+
+  description String
+
+  project   Project @relation("projectUnits", fields: [projectId], references: [id])
+  projectId String
 }
