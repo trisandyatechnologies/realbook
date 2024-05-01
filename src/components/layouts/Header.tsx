@@ -29,10 +29,12 @@ import {
   CreditCardFilled,
   WifiOutlined,
   FileImageFilled,
+  HomeOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import usePageContext from "@/utils/hooks/usePageContext";
+import SelectCity from "../common/SelectCity";
 
 const data = [
   {
@@ -88,7 +90,10 @@ export default function Header({ placement, onPress }: HeaderProps) {
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
 
-  const { title, navItems } = usePageContext();
+  const {
+    title,
+    navItems = [{ title: <HomeOutlined />, href: "/" }, { separator: "" }],
+  } = usePageContext();
 
   return (
     <>
@@ -145,11 +150,9 @@ export default function Header({ placement, onPress }: HeaderProps) {
             <UserOutlined />
             <span>Jyothi Babu Araja</span>
           </Link>
-          <Input
-            className="header-search"
-            placeholder="Type here..."
-            prefix={<SearchOutlined />}
-          />
+          <div className="header-search">
+            <SelectCity defaultValue="Hyderabad" />
+          </div>
         </Col>
       </Row>
     </>

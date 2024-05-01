@@ -4,9 +4,9 @@ import { create } from "zustand";
 interface PageContextStore {
   title?: string;
   setTitle: (title: string) => void;
-  navItems: BreadcrumbItemType[];
+  navItems?: BreadcrumbItemType[];
   setItems: (items: BreadcrumbItemType[]) => void;
-  setContext: (title: string, items: BreadcrumbItemType[]) => void;
+  setContext: (title: string, items?: BreadcrumbItemType[]) => void;
   reset: () => void;
 }
 
@@ -19,11 +19,11 @@ export const usePageContextStore = create<PageContextStore>((set, get) => ({
   setItems: (navItems) => {
     set({ navItems });
   },
-  setContext: (title: string, navItems: BreadcrumbItemType[]) => {
-    set({ title, navItems });
+  setContext: (title: string, navItems?: BreadcrumbItemType[]) => {
+    set({ title, navItems: navItems });
   },
   reset: () => {
-    set({ title: "Home", navItems: [] });
+    set({ title: "Home", navItems: undefined });
   },
 }));
 

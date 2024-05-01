@@ -26,7 +26,7 @@ model User {
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   name          String
-  image         String?
+  image         String[]
   email         String?   @unique
   emailVerified Boolean   @default(false)
   phone         String    @unique
@@ -51,8 +51,8 @@ model Agent {
   job       String?
   education String?
   bio       String?
-  image     String?
-  cover     String?
+  image     String[]
+  cover     String[]
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
@@ -74,9 +74,10 @@ model Agency {
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   name    String
-  logo    String?
-  email   String? @unique
-  phone   String? @unique
+  logo    String[]
+  cover   String[]
+  email   String?  @unique
+  phone   String?  @unique
   address Json?
 
   owner   User   @relation("agencyOwner", fields: [ownerId], references: [id])
@@ -115,11 +116,14 @@ model Company {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  name    String
-  logo    String?
-  email   String? @unique
-  phone   String? @unique
-  address Json?
+  name        String
+  logo        String[]
+  cover       String[]
+  description String?
+  email       String?
+  phone       String?
+  address     Json?
+  startDate   DateTime?
 
   owner   User   @relation("companyOwner", fields: [ownerId], references: [id])
   ownerId String

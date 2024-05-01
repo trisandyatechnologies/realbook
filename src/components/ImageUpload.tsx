@@ -8,6 +8,7 @@ import Image from "next/image";
 import { getImage } from "@/utils/util";
 
 interface ImageUploadProps {
+  children?: React.ReactNode;
   disabled?: boolean;
   onChange?: (value: string[]) => void;
   value?: string[];
@@ -17,6 +18,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   disabled = false,
   onChange,
   value = [],
+  children = "Upload Image",
 }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [images, setImages] = useState(value);
@@ -33,6 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     const newImages = [...images, result.info.path];
     setImages(newImages);
     onChange?.(newImages);
+    console.log("UPLOAD", images, newImages);
   };
 
   const onRemove = (i: number, url: string) => {
@@ -42,15 +45,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   };
 
   useEffect(() => {
-    setImages(value);
-  }, [value]);
+    if (JSON.stringify(images) !== JSON.stringify(value)) {
+      setImages(value);
+    }
+  }, [value, images]);
 
   if (!isMounted) {
     return null;
   }
 
   return (
-    <Flex gap={padding / 2} style={{ padding }} className="image-upload">
+    <Flex gap={padding / 2} className="image-upload">
       {images.map((path, i) => (
         <Flex
           key={path}
@@ -78,7 +83,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 onClick={() => open()}
                 className="upload-btn"
               >
-                Upload Image
+                {children}
               </Button>
             </Flex>
           );

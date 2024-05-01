@@ -12,3 +12,6 @@ export const appName = process.env.NEXT_PUBLIC_APP_NAME;
 export const parentName = process.env.NEXT_PUBLIC_PARENT_NAME;
 export const parentLegalName = process.env.NEXT_PUBLIC_PARENT_LEGAL_NAME;
 export const parentSiteAddress = process.env.NEXT_PUBLIC_PARENT_SITE_ADDRESS;
+
+export const defaultCountry =
+  process.env.NEXT_PUBLIC_DEFAULT_COUNTRY ?? "India";

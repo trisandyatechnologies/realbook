@@ -2,14 +2,21 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
-  const data = await req.json();
+  const { ownerId, ...restData } = await req.json();
   const company = await prisma.company.create({
-    data,
+    data: {
+      ...restData,
+      owner: {
+        connect: {
+          id: ownerId,
+        },
+      },
+    },
   });
   return NextResponse.json(company);
 }
 
 export async function GET(req: Request, res: Response) {
-  const companys = await prisma.company.findMany({});
-  return NextResponse.json(companys);
+  const companies = await prisma.company.findMany({});
+  return NextResponse.json(companies);
 }

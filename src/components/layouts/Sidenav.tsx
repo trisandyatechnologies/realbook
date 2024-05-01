@@ -17,12 +17,11 @@ import { usePathname } from "next/navigation";
 
 export default function Sidenav() {
   const {
-    token: { colorBgContainer },
+    token: { colorBgContainer, colorPrimaryHover, colorPrimaryActive },
   } = theme.useToken();
 
-  const color = colorBgContainer;
+  const color = colorPrimaryActive;
   const pathname = usePathname();
-  const page = pathname.replace("/", "");
 
   return (
     <>
@@ -36,7 +35,7 @@ export default function Sidenav() {
             <span
               className="icon"
               style={{
-                background: page === "dashboard" ? color : "",
+                background: pathname === "/" ? color : "",
               }}
             >
               <DashboardOutlined />
@@ -44,12 +43,25 @@ export default function Sidenav() {
             <span className="label">Home</span>
           </Link>
         </Menu.Item>
+        <Menu.Item key="companies">
+          <Link href="/companies">
+            <span
+              className="icon"
+              style={{
+                background: pathname.startsWith("/companies") ? color : "",
+              }}
+            >
+              <ApartmentOutlined />
+            </span>
+            <span className="label">Companies</span>
+          </Link>
+        </Menu.Item>
         <Menu.Item key="2">
           <Link href="/projects">
             <span
               className="icon"
               style={{
-                background: page === "tables" ? color : "",
+                background: pathname.startsWith("/projects") ? color : "",
               }}
             >
               <ApartmentOutlined />
@@ -62,7 +74,7 @@ export default function Sidenav() {
             <span
               className="icon"
               style={{
-                background: page === "billing" ? color : "",
+                background: pathname.startsWith("/agents") ? color : "",
               }}
             >
               <UserOutlined />
@@ -75,7 +87,7 @@ export default function Sidenav() {
             <span
               className="icon"
               style={{
-                background: page === "rtl" ? color : "",
+                background: pathname.startsWith("/prospects") ? color : "",
               }}
             >
               <BankOutlined />
@@ -91,7 +103,7 @@ export default function Sidenav() {
             <span
               className="icon"
               style={{
-                background: page === "profile" ? color : "",
+                background: pathname.startsWith("/profile") ? color : "",
               }}
             >
               <ProfileOutlined />
@@ -102,7 +114,12 @@ export default function Sidenav() {
 
         <Menu.Item key="8">
           <Link href="/settings">
-            <span className="icon">
+            <span
+              className="icon"
+              style={{
+                background: pathname.startsWith("/settings") ? color : "",
+              }}
+            >
               <SettingOutlined />
             </span>
             <span className="label">Settings</span>
