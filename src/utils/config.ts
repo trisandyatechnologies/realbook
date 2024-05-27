@@ -15,3 +15,7 @@ export const parentSiteAddress = process.env.NEXT_PUBLIC_PARENT_SITE_ADDRESS;
 
 export const defaultCountry =
   process.env.NEXT_PUBLIC_DEFAULT_COUNTRY ?? "India";
+
+export const DEFAULT_PAGE_SIZE = Number(
+  process.env.NEXT_PUBLIC_DEFAULT_PAGE_SIZE ?? 10
+);

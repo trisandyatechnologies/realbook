@@ -17,9 +17,10 @@ export default class BaseAPI<T> {
     return res.data;
   }
 
-  //TODO: Pagination
-  async findAll() {
-    const res = await axios.get<T[]>(`${this.restPath}`);
+  async findAll(query: BaseQuery) {
+    const res = await axios.get<IPaginatedData<T>>(`${this.restPath}`, {
+      params: query,
+    });
     return res.data;
   }
 

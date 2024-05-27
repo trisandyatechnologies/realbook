@@ -1,40 +1,47 @@
 "use client";
-import ProfileCard from "@/components/common/ProfileCard";
-import SearchCity from "@/components/common/SelectCity";
+import CompanyList from "@/components/CompanyList";
+import Pagination from "@/components/common/Pagination";
 import SearchInput from "@/components/common/SearchInput";
+import { companyApi } from "@/lib/apis/company/companyApi";
 import { useCompanyStore } from "@/lib/apis/company/companyStore";
 import { PATHS } from "@/utils/constants";
 import { usePageContextStore } from "@/utils/hooks/usePageContext";
-import { getImage } from "@/utils/util";
-import { PlusOutlined, RightOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Image, Row, Typography, theme } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Row } from "antd";
 import Link from "next/link";
-import { useEffect } from "react";
-
-const { Title, Text, Paragraph } = Typography;
+import { useEffect, useState } from "react";
 
 export default function Companies() {
-  const {
-    token: { padding },
-  } = theme.useToken();
   const setPageContext = usePageContextStore((s) => s.setContext);
   useEffect(() => {
     setPageContext("Companies");
   }, [setPageContext]);
 
   const getCompanies = useCompanyStore((s) => s.getCompanies);
-  const companies = useCompanyStore((s) => s.companies);
+  const companies = useCompanyStore((s) => s.records);
+  const [q, setQuery] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getCompanies();
-  }, [getCompanies]);
+    getCompanies({ q, page });
+  }, [getCompanies, q, page]);
 
   return (
     <div className="layout-content">
       <Card className="header-solid h-full ant-card-p-0 mb-24">
         <Row gutter={[24, 0]} className="ant-row-flex ant-row-flex-middle">
           <Col xs={24} md={8} lg={8}>
-            <SearchCity />
+            <SearchInput
+              searchApi={(q) =>
+                companyApi
+                  .findAll({ q })
+                  .then((d) =>
+                    d.data.map((o) => ({ label: o.name, value: o.id }))
+                  )
+              }
+              getPath={(id) => `${PATHS.COMPANIES}/${id}`}
+              onChange={setQuery}
+            />
           </Col>
           <Col xs={24} md={4} lg={8}></Col>
           <Col xs={24} md={12} lg={8} className="d-flex">
@@ -46,18 +53,8 @@ export default function Companies() {
           </Col>
         </Row>
       </Card>
-      <Row gutter={[24, 24]}>
-        {companies.map((company) => (
-          <Col span={24} md={12} xl={6} key={company.id}>
-            <ProfileCard
-              cover={company.cover[0]}
-              image={company.logo[0]}
-              title={company.name}
-              description={company.description ?? undefined}
-            />
-          </Col>
-        ))}
-      </Row>
+      <CompanyList data={companies?.data} />
+      <Pagination total={companies?.total} onChange={setPage} />
     </div>
   );
 }

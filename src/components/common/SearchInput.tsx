@@ -11,11 +11,11 @@ const renderItem = (
   getPath: (id: string) => string,
   getLabel?: (id: string) => React.ReactNode
 ) => ({
-  value: d.id,
+  value: d.value,
   label: getLabel ? (
-    getLabel(d.id)
+    getLabel(d.value as string)
   ) : (
-    <Link href={getPath(d.id)}>{d.label}</Link>
+    <Link href={getPath(d.value as string)}>{d.label}</Link>
   ),
 });
 
@@ -49,10 +49,7 @@ export default function SearchInput(props: SearchInputProps) {
   };
 
   return (
-    <form
-      action={PATHS.COMPANIES}
-      style={{ display: "flex", flex: 1, maxWidth: 720 }}
-    >
+    <form style={{ display: "flex", flex: 1, maxWidth: 720 }}>
       <AutoComplete
         popupClassName="search-dropdown"
         popupMatchSelectWidth={true}
@@ -65,10 +62,10 @@ export default function SearchInput(props: SearchInputProps) {
         }}
       >
         <Input
-          className="header-search"
           placeholder={props.placeholder ?? "Search"}
           prefix={<SearchOutlined />}
           name="q"
+          size="small"
         />
       </AutoComplete>
     </form>
